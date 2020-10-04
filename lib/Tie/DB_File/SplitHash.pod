@@ -81,6 +81,9 @@ data loss. I<Don't do it.>
 
 =head1 CHANGES
 
+ 1.07 2020.10.04 - Fixes for MSWin directory permissions
+                   and file descriptor behavior breaking tests.
+
  1.06 2020.10.03 - Fixes for temp directory issue in tests (thanks goes
                    to jkeenan [...] cpan.org for identifying the problem
                    and submitting a patch for it). Updated maintainer info.
@@ -205,7 +208,7 @@ Jerilyn Franz
 
 =head1 VERSION
 
-1.06 - 2020.10.03
+1.07 - 2020.10.04
 
 =head1 SEE ALSO
 
