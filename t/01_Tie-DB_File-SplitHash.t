@@ -1,4 +1,5 @@
 use strict;
+use warnings;
 
 use lib ('./blib','../blib', './lib','../lib');
 
@@ -10,8 +11,12 @@ use Tie::DB_File::SplitHash;
 #########################
 # change 'tests => 9' to 'tests => last_test_to_print';
 
+use English;
 use File::Spec;
 use File::Path qw( rmtree );
+
+my $windows = ($OSNAME eq 'MSWin32') ? 1 : 0;
+
 eval {
     require File::Temp;
     File::Temp->import('tempdir');
@@ -90,7 +95,7 @@ sub test_permissions {
     }
 
     my $seed = 0;
-    {
+    if (not $windows) {
         my $tdir = File::Spec->catdir(
             File::Spec->tmpdir(),
             $$ . sprintf("%02s" => ++$seed),
@@ -121,7 +126,7 @@ sub test_permissions {
         (! -d $tdir) or warn "Directory $tdir not removed";
     }
 
-    {
+    if (not $windows) {
         my $tdir = File::Spec->catdir(
             File::Spec->tmpdir(),
             $$ . sprintf("%02s" => ++$seed),
@@ -369,7 +374,7 @@ sub test_obj_hash {
             diag("delete on non-existent key returned unexpected value");
             return 0;
         }
-        unless ($obj->fd) {
+        if (not ($windows or $obj->fd)) { 
             diag("'fd' failed to return file descriptor");
             return 0;
         }

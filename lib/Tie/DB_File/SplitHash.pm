@@ -12,7 +12,7 @@ use Fcntl qw (:flock);
 require Exporter;
 use vars qw ($VERSION @ISA @EXPORT $DB_HASH);
 
-$VERSION = '1.06';
+$VERSION = '1.07';
 @ISA     = qw (Tie::Hash Exporter);
 @EXPORT  = qw(
         $DB_HASH 
